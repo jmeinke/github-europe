@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>GitHub Europe Users</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet' />
+    <style>
+      body { margin:0; padding:0; }
+      #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <script>
+    L.mapbox.accessToken = 'pk.eyJ1Ijoiam1laW5rZSIsImEiOiJjaWZmZXRneWQwMGtsdG5seWNicHZuZTVsIn0.2P5cqgkl73xDcgkRV3uYOg';
+    var map = L.mapbox.map('map', 'jmeinke.ciffetgsn00k2ttknqkl44y2v');
+    </script>
+
+  </body>
+</html>
