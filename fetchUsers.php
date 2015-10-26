@@ -73,28 +73,33 @@ if ($rateLimits["rate"]["remaining"] > 0) {
 }
 
 // Use the GutHub Api to retrieve users from every city.
-foreach ($cityCoords->find() as $city) {
-    $query = array("location:".$city['city'], 'followers', 'desc');
-    if (!continueSearch($github)) waitUntil($github);
-    $r = $paginator->fetch($searchApi, 'users', $query);
-    echo ("We've found ". $r["total_count"] ." users for ". $city['city_ascii'] .".\n");
+$cityCursor = $cityCoords->find();
+$cityCursor = $cityCursor->sort(array('city_ascii' => 1));
+foreach ($cityCursor as $city) {
+  if (!continueSearch($github)) waitUntil($github);
+  $r = $searchApi->users("location:\"".$city['city']."\"", "followers", "desc");
+  echo ("We've found ". $r["total_count"] ." users for ". $city['city_ascii'] .".\n");
 
-    try {
-      $total_count = array('$set' => array("gh_total_count" => $r["total_count"]));
-      $cityCoords->update(array("city_ascii" => $city['city_ascii']), $total_count);
-      // while ($paginator->hasNext()) {
-        if (!empty($r["items"])) {
-            echo "Inserting ". count($r["items"]) ." users from ". $city['city_ascii'] . ".\n";
-            $city_users = array('$set' => array("gh_users" => $r["items"]));
-            $cityCoords->update(array("city_ascii" => $city['city_ascii']), $city_users);
-        }
-        // if (!continueSearch($github)) waitUntil($github);
-        // $r = $paginator->fetchNext();
-      // }
-   }
-   catch (MongoException $e) {
-     echo $e->getMessage() . "\n";
-   }
+  try {
+    $total_count = array('$set' => array("gh_total_count" => $r["total_count"]));
+    $cityCoords->update(array("city_ascii" => $city['city_ascii']), $total_count);
+
+    if (!empty($r["items"])) {
+      $userArray = $r["items"];
+      /*
+      for ($i = 0; $i < count($r["items"]); $i++) {
+        $userArray[$i]["rank"] = $i;
+      }
+      */
+
+      echo "Inserting ". count($userArray) ." users from ". $city['city_ascii'] . ".\n";
+      $city_users = array('$set' => array("gh_users" => $userArray));
+      $cityCoords->update(array("city_ascii" => $city['city_ascii']), $city_users);
+    }
+  }
+  catch (MongoException $e) {
+   echo $e->getMessage() . "\n";
+  }
 }
 
 // Close the connection to MongoDB

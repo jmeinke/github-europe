@@ -34,7 +34,7 @@ try {
       $i = 0;
       $topCityUsers = "Top ten users: <br/>";
       $users = $city["gh_users"];
-      usort($users, "sort_by_score");
+      // usort($users, "sort_by_rank");
       foreach ($users as $user) {
         if ($i > 9) break;
         $topCityUsers .= "<div class=\"gh_profile\">"
@@ -83,6 +83,8 @@ catch (MongoException $e) {
   exit($e->getMessage()."\n");
 }
 
-function sort_by_score($u1, $u2) {
-    return $u1['score'] > $u2['score'];
+/*
+function sort_by_rank($u1, $u2) {
+    return $u1["rank"] > $u2["rank"];
 }
+*/
