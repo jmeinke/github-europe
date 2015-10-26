@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>GitHub Europe Users</title>
+    <title>GitHub Europe - 26th of Oct 2015</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet' />
@@ -37,8 +37,8 @@
 
     <script>
     L.mapbox.accessToken = 'pk.eyJ1Ijoiam1laW5rZSIsImEiOiJjaWZmZXRneWQwMGtsdG5seWNicHZuZTVsIn0.2P5cqgkl73xDcgkRV3uYOg';
-    var map = L.mapbox.map('map', 'mapbox.outdoors');
-      // .setView([47.9959, 7.85222], 12);
+    var map = L.mapbox.map('map', 'mapbox.outdoors')
+                      .setView([50.11552, 8.68417], 5);
 
     var mapLayer = L.mapbox.featureLayer().addTo(map);
     // mapLayer.setGeoJSON(europe_info);

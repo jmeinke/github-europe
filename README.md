@@ -1,8 +1,9 @@
 GitHub Europe
 =============
 
-This project highlights GitHub usage in Europe. It was inspired from [codeafrica.org](http://codeafrica.org).
-See the top ten GitHub users of every city dependent of the number of followers.
+See the top ten most followed GitHub users of every city!
+This project highlights [GitHub usage in Europe](http://jmeinke.github.io/github-europe/).
+The idea to this project was inspired by [codeafrica.org](http://codeafrica.org).
 
 Methodology
 -----------
