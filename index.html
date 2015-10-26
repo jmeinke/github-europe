@@ -6,9 +6,30 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet' />
+    <script src="data/github-europe.js" type="text/javascript"></script>
     <style>
       body { margin:0; padding:0; }
       #map { position:absolute; top:0; bottom:0; width:100%; }
+      .gh_profile {
+        margin-top: 1px;
+        padding-bottom: 1px;
+        border-bottom: 1px solid #CCC;
+        height: 25px;
+        width: 150px;
+        clear: left;
+      }
+      .gh_profile img {
+        float:left;
+        height: 25px;
+        width: 25px;
+      }
+      .gh_profile a {
+        float:left;
+        padding: 0;
+        margin: 0;
+        padding-left: 5px;
+      }
+
     </style>
   </head>
   <body>
@@ -16,7 +37,36 @@
 
     <script>
     L.mapbox.accessToken = 'pk.eyJ1Ijoiam1laW5rZSIsImEiOiJjaWZmZXRneWQwMGtsdG5seWNicHZuZTVsIn0.2P5cqgkl73xDcgkRV3uYOg';
-    var map = L.mapbox.map('map', 'jmeinke.ciffetgsn00k2ttknqkl44y2v');
+    var map = L.mapbox.map('map', 'mapbox.outdoors');
+      // .setView([47.9959, 7.85222], 12);
+
+    var mapLayer = L.mapbox.featureLayer().addTo(map);
+    // mapLayer.setGeoJSON(europe_info);
+
+    L.mapbox.featureLayer(europe_info, {
+        pointToLayer: function(feature, latlon) {
+            // L.circleMarker() draws a circle with fixed radius in pixels.
+            // To draw a circle overlay with a radius in meters, use L.circle()
+            return L.circleMarker(latlon,
+              {
+                radius: feature.properties.radius
+              }
+            );
+        }
+    }).addTo(map);
+
+    /*L.geoJson(europe_info, {
+			pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+            radius: 5,
+            fillColor: "#ff7800",
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.5
+        });
+			}
+		}).addTo(map);*/
     </script>
 
   </body>

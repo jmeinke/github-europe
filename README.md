@@ -19,4 +19,6 @@ Usage
 $ php composer.phar install
 ```
 * Add your username and password (in clear) to `config.php`
-* Launch `./fetchUsers.php` to populate the MongoDB collections
+* Launch `./loadCities.php` to import cities into MongoDB
+* Launch `./fetchUsers.php` to query GitHub users
+* Launch `./generateGeoJSON.php` to generate a GeoJSON file
